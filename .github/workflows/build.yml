@@ -1,0 +1,49 @@
+name: Build TrustStore Helper
+on: [push, workflow_dispatch]
+jobs:
+build:
+runs-on: macos-latest
+steps:
+- uses: actions/checkout@v3
+
+  - name: Setup Xcodegen
+    run: brew install xcodegen
+
+  - name: Create project.yml
+    run: |
+      cat << 'EOF' > project.yml
+      name: TrustStoreHelper
+      options:
+        bundleIdPrefix: com.truststore
+      targets:
+        TrustStoreHelper:
+          type: application
+          platform: iOS
+          deploymentTarget: "14.0"
+          sources: [Sources]
+          info:
+            path: Info.plist
+            properties:
+              CFBundleURLTypes:
+                - CFBundleURLSchemes: [truststoreimport]
+              NSPhotoLibraryAddUsageDescription: "نحتاج هذا الإذن لحفظ الصور."
+      EOF
+
+  - name: Generate Xcode Project
+    run: xcodegen generate
+
+  - name: Build App
+    run: |
+      xcodebuild -project TrustStoreHelper.xcodeproj -scheme TrustStoreHelper -sdk iphoneos -configuration Release CODE_SIGNING_ALLOWED=NO
+
+  - name: Package IPA
+    run: |
+      mkdir Payload
+      mv build/Release-iphoneos/TrustStoreHelper.app Payload/
+      zip -r TrustStoreHelper.ipa Payload
+
+  - name: Upload IPA
+    uses: actions/upload-artifact@v3
+    with:
+      name: TrustStoreHelper-IPA
+      path: TrustStoreHelper.ipa
