@@ -17,4 +17,4 @@ targets:
       properties:
         CFBundleURLTypes:
           - CFBundleURLSchemes: [truststoreimport]
-        NSPhotoLibraryAddUsageDescription: "نحتاج هذا الإذن لحفظ الصور.
+        NSPhotoLibraryAddUsageDescription: "We need this permission to save photos.
