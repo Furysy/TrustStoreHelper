@@ -17,7 +17,7 @@ jobs:
           mv build/Release-iphoneos/TrustStoreHelper.app Payload/
           zip -r TrustStoreHelper.ipa Payload
       - name: Upload IPA
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: TrustStoreHelper-IPA
           path: TrustStoreHelper.ipa
