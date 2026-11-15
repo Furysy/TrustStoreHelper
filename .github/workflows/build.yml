@@ -1,28 +1,23 @@
-name: Build TrustStore Helper
+name: Build
 on: [push, workflow_dispatch]
 jobs:
-build:
-runs-on: macos-latest
-steps:
-- uses: actions/checkout@v3
-
-  - name: Setup Xcodegen
-    run: brew install xcodegen
-
-  - name: Generate Project
-    run: xcodegen generate
-
-  - name: Build App
-    run: xcodebuild -project TrustStoreHelper.xcodeproj -scheme TrustStoreHelper -sdk iphoneos -configuration Release CODE_SIGNING_ALLOWED=NO
-
-  - name: Package IPA
-    run: |
-      mkdir Payload
-      mv build/Release-iphoneos/TrustStoreHelper.app Payload/
-      zip -r TrustStoreHelper.ipa Payload
-
-  - name: Upload IPA
-    uses: actions/upload-artifact@v3
-    with:
-      name: TrustStoreHelper-IPA
-      path: TrustStoreHelper.ipa
+  build:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Setup Xcodegen
+        run: brew install xcodegen
+      - name: Generate Project
+        run: xcodegen generate
+      - name: Build App
+        run: xcodebuild -project TrustStoreHelper.xcodeproj -scheme TrustStoreHelper -sdk iphoneos -configuration Release CODE_SIGNING_ALLOWED=NO
+      - name: Package IPA
+        run: |
+          mkdir Payload
+          mv build/Release-iphoneos/TrustStoreHelper.app Payload/
+          zip -r TrustStoreHelper.ipa Payload
+      - name: Upload IPA
+        uses: actions/upload-artifact@v3
+        with:
+          name: TrustStoreHelper-IPA
+          path: TrustStoreHelper.ipa
