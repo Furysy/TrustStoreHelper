@@ -1,0 +1,15 @@
+name: TrustStoreHelper
+options:
+  bundleIdPrefix: com.truststore
+targets:
+  TrustStoreHelper:
+    type: application
+    platform: iOS
+    deploymentTarget: "14.0"
+    sources: [Sources]
+    info:
+      path: Info.plist
+      properties:
+        CFBundleURLTypes:
+          - CFBundleURLSchemes: [truststoreimport]
+        NSPhotoLibraryAddUsageDescription: "نحتاج هذا الإذن لحفظ الصور."
