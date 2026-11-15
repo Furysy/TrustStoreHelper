@@ -9,32 +9,11 @@ steps:
   - name: Setup Xcodegen
     run: brew install xcodegen
 
-  - name: Create project.yml
-    run: |
-      cat << 'EOF' > project.yml
-      name: TrustStoreHelper
-      options:
-        bundleIdPrefix: com.truststore
-      targets:
-        TrustStoreHelper:
-          type: application
-          platform: iOS
-          deploymentTarget: "14.0"
-          sources: [Sources]
-          info:
-            path: Info.plist
-            properties:
-              CFBundleURLTypes:
-                - CFBundleURLSchemes: [truststoreimport]
-              NSPhotoLibraryAddUsageDescription: "نحتاج هذا الإذن لحفظ الصور."
-      EOF
-
-  - name: Generate Xcode Project
+  - name: Generate Project
     run: xcodegen generate
 
   - name: Build App
-    run: |
-      xcodebuild -project TrustStoreHelper.xcodeproj -scheme TrustStoreHelper -sdk iphoneos -configuration Release CODE_SIGNING_ALLOWED=NO
+    run: xcodebuild -project TrustStoreHelper.xcodeproj -scheme TrustStoreHelper -sdk iphoneos -configuration Release CODE_SIGNING_ALLOWED=NO
 
   - name: Package IPA
     run: |
