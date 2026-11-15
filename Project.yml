@@ -6,10 +6,15 @@ targets:
     type: application
     platform: iOS
     deploymentTarget: "14.0"
-    sources: [Sources]
+    sources: 
+      - Sources
+      - Assets.xcassets
+    settings:
+      base:
+        ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
     info:
       path: Info.plist
       properties:
         CFBundleURLTypes:
           - CFBundleURLSchemes: [truststoreimport]
-        NSPhotoLibraryAddUsageDescription: "نحتاج هذا الإذن لحفظ الصور."
+        NSPhotoLibraryAddUsageDescription: "نحتاج هذا الإذن لحفظ الصور.
