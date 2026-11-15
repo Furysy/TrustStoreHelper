@@ -12,9 +12,13 @@ targets:
     settings:
       base:
         ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
+        INFOPLIST_KEY_CFBundleDisplayName: "Trust Store"
     info:
       path: Info.plist
       properties:
+        CFBundleDisplayName: "Trust Store"
         CFBundleURLTypes:
           - CFBundleURLSchemes: [truststoreimport]
         NSPhotoLibraryAddUsageDescription: NeedsPhotoAccess
+        UIFileSharingEnabled: true
+        LSSupportsOpeningDocumentsInPlace: true
