@@ -4,17 +4,17 @@ jobs:
   build:
     runs-on: macos-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: Setup Xcodegen
         run: brew install xcodegen
       - name: Generate Project
         run: xcodegen generate
       - name: Build App
-        run: xcodebuild -project TrustStoreHelper.xcodeproj -scheme TrustStoreHelper -sdk iphoneos -configuration Release CODE_SIGNING_ALLOWED=NO
+        run: xcodebuild -project TrustStoreHelper.xcodeproj -scheme TrustStoreHelper -sdk iphoneos -configuration Release CODE_SIGNING_ALLOWED=NO -derivedDataPath build
       - name: Package IPA
         run: |
           mkdir Payload
-          mv build/Release-iphoneos/TrustStoreHelper.app Payload/
+          mv build/Build/Products/Release-iphoneos/TrustStoreHelper.app Payload/
           zip -r TrustStoreHelper.ipa Payload
       - name: Upload IPA
         uses: actions/upload-artifact@v4
