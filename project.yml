@@ -5,8 +5,8 @@ targets:
   TrustStoreHelper:
     type: application
     platform: iOS
-    deploymentTarget: "14.0"
-    sources: 
+    deploymentTarget: 14.0
+    sources:
       - Sources
       - Assets.xcassets
     settings:
@@ -17,4 +17,4 @@ targets:
       properties:
         CFBundleURLTypes:
           - CFBundleURLSchemes: [truststoreimport]
-        NSPhotoLibraryAddUsageDescription: "We need this permission to save photos.
+        NSPhotoLibraryAddUsageDescription: NeedsPhotoAccess
